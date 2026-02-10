@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>MIHU STUDIO — Editor de Texto</title>
+
+  <!-- CodeMirror 5 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="dot"></div>
+        <div>
+          <div class="title">MIHU STUDIO</div>
+          <div class="subtitle">Editor de Texto</div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <!-- ✅ Conectar virou toggle (Conectar/Desconectar) -->
+        <button id="btnConnect" class="btn primary">Conectar</button>
+
+        <span class="sep"></span>
+
+        <button id="btnNew" class="btn">Novo</button>
+        <button id="btnSaveToDevice" class="btn" disabled>Salvar na Placa</button>
+
+        <button id="btnUpload" class="btn" disabled>Importar .py</button>
+        <input id="filePicker" type="file" accept=".py,.txt" hidden>
+
+        <span class="sep"></span>
+
+        <button id="btnRun" class="btn success" disabled>Executar</button>
+        <button id="btnStop" class="btn danger" disabled>Stop</button>
+        <button id="btnSoftReset" class="btn" disabled>Soft reset</button>
+
+        <span class="sep"></span>
+
+        <label class="baud">
+          Baud
+          <input id="baud" type="number" value="115200" min="1200" step="100">
+        </label>
+      </div>
+
+      <div class="status" id="status">
+        <span class="pill offline" id="pill">offline</span>
+        <span class="mono" id="statusText">Nenhuma porta conectada</span>
+      </div>
+    </header>
+
+    <main class="main">
+      <aside class="sidebar">
+        <div class="sidehead">
+          <div class="side-title">Arquivos da Placa</div>
+          <div class="side-path mono" id="cwd">/</div>
+        </div>
+
+        <!-- ✅ Removeu pathInput + botão Ir
+             ✅ Adicionou ações: Nova pasta / Renomear / Deletar
+        -->
+        <div class="side-actions">
+          <button id="btnUp" class="btn small" disabled title="Pasta acima">..</button>
+
+          <button id="btnMkdir" class="btn small" disabled title="Criar pasta">+ Pasta</button>
+          <button id="btnRename" class="btn small" disabled title="Renomear selecionado">Renomear</button>
+          <button id="btnDeleteSel" class="btn small danger" disabled title="Deletar selecionado">Deletar</button>
+        </div>
+
+        <div class="filelist" id="fileList">
+          <div class="hint">Conecte para listar os arquivos.</div>
+        </div>
+
+        <div class="sidefoot">
+          <div class="hint small">Dicas: duplo clique abre pasta/arquivo • clique direito abre menu</div>
+        </div>
+      </aside>
+
+      <section class="editor">
+        <div class="tabs" id="tabs"></div>
+        <div class="fileinfo mono" id="openFileInfo">—</div>
+        <div class="editorwrap">
+          <textarea id="code"></textarea>
+        </div>
+      </section>
+    </main>
+
+    <footer class="repl">
+      <div class="repl-head">
+        <div class="repl-title">REPL</div>
+        <div class="repl-hint">Enter envia comando • Ctrl+Enter executa editor</div>
+      </div>
+
+      <div class="terminal" id="terminal"></div>
+
+      <div class="repl-input">
+        <span class="prompt mono" id="prompt">&gt;&gt;&gt;</span>
+        <input id="replInput" class="input mono" placeholder="Digite aqui e pressione Enter..." disabled>
+        <button id="btnSend" class="btn small" disabled>Enviar</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ✅ Menu de contexto atualizado (sem Baixar; com Renomear/Deletar) -->
+  <div id="ctx" class="ctxmenu hidden">
+    <button data-act="open">Abrir</button>
+    <button data-act="cat">Ver conteúdo</button>
+    <button data-act="rename">Renomear</button>
+    <div class="hr"></div>
+    <button data-act="delete" class="danger">Deletar</button>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+</html>

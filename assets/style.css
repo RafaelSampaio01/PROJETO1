@@ -1,0 +1,313 @@
+/* =========================
+   Base / Reset
+========================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* =========================
+   Fundo (estilo da imagem)
+   - se quiser trocar por imagem real, use:
+     .bg { background-image:url("assets/img/seu_fundo.png"); ... }
+========================= */
+.bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(1200px 700px at 15% 15%, rgba(0,140,255,.35), transparent 60%),
+    radial-gradient(1000px 600px at 70% 20%, rgba(0,255,200,.18), transparent 60%),
+    radial-gradient(900px 600px at 85% 70%, rgba(120,90,255,.18), transparent 65%),
+    linear-gradient(180deg, #050608 0%, #07090f 40%, #04050a 100%);
+  filter: saturate(1.05);
+  z-index: -2;
+}
+
+.bg::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.035) 0px,
+      rgba(255,255,255,.035) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  opacity: .25;
+  mix-blend-mode: overlay;
+  z-index: -1;
+}
+
+/* “arcos” azuis simulando trilhas */
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background:
+    conic-gradient(from 220deg at 25% 45%,
+      transparent 0 25%,
+      rgba(0,170,255,.35) 25% 28%,
+      transparent 28% 33%,
+      rgba(0,140,255,.25) 33% 37%,
+      transparent 37% 100%
+    );
+  filter: blur(10px);
+  opacity: .65;
+}
+
+/* =========================
+   Layout
+========================= */
+.stage {
+  height: 100%;
+  padding: 40px 46px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.hero {
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.hero-modes {
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.hero-right { text-align: right; }
+.hero-title {
+  font-weight: 900;
+  font-size: clamp(36px, 4.4vw, 54px);
+  letter-spacing: .5px;
+}
+.hero-sub {
+  font-weight: 800;
+  font-size: clamp(18px, 2vw, 28px);
+  opacity: .95;
+}
+
+.hero-left { min-width: 180px; }
+.hero-center {
+  text-align: center;
+  flex: 1;
+}
+.hero-kicker {
+  font-weight: 900;
+  font-size: clamp(18px, 2.2vw, 26px);
+  opacity: .95;
+}
+.hero-product {
+  margin-top: 6px;
+  font-weight: 800;
+  font-size: 16px;
+  opacity: .9;
+}
+
+/* Botão voltar */
+.back-btn {
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
+}
+.back-btn:hover { transform: translateY(-1px); background: rgba(255,255,255,.10); }
+.back-btn:active { transform: translateY(0px); }
+
+/* =========================
+   Carrossel
+========================= */
+.carousel {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.track {
+  width: 100%;
+  max-width: 1280px;
+  padding: 18px 10px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 1fr);
+  gap: 34px;
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.25) transparent;
+}
+.track::-webkit-scrollbar { height: 10px; }
+.track::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.22);
+  border-radius: 999px;
+}
+.track::-webkit-scrollbar-track { background: transparent; }
+
+.nav-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.28);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease, opacity .2s ease;
+  user-select: none;
+}
+.nav-btn span { font-size: 34px; line-height: 0; transform: translateY(-1px); }
+.nav-btn:hover { transform: translateY(-1px); background: rgba(0,0,0,.40); }
+.nav-btn:active { transform: translateY(0px); }
+
+.nav-left { position: absolute; left: 0; }
+.nav-right { position: absolute; right: 0; }
+
+/* =========================
+   Card
+========================= */
+.card {
+  scroll-snap-align: center;
+  height: 250px;
+  border-radius: 22px;
+  background: rgba(72,72,72,.85);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  padding: 20px 20px 18px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-4px);
+  background: rgba(80,80,80,.92);
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+.card:active { transform: translateY(-1px); }
+
+.card-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+}
+
+.card-img {
+  width: 190px;
+  height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
+}
+
+.card-label {
+  text-align: center;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 1.02;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.card-sub {
+  text-align: center;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1.0;
+  opacity: .95;
+}
+
+/* Card “modo” (BLOCOS/FLUXOGRAMA/TEXTO) */
+.card.mode .card-top { height: 110px; }
+.card.mode .mode-icon {
+  width: 96px;
+  height: 96px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.08);
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.card.mode .card-label { font-size: 34px; }
+
+/* =========================
+   Footer
+========================= */
+.footer {
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-line {
+  height: 1px;
+  width: 100%;
+  background: rgba(255,255,255,.22);
+}
+.footer-text {
+  text-align: center;
+  font-weight: 800;
+  opacity: .92;
+}
+
+/* =========================
+   Toast
+========================= */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.18);
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-weight: 800;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+/* =========================
+   Responsivo
+========================= */
+@media (max-width: 900px) {
+  body { overflow: auto; }
+  .stage { padding: 24px 18px 18px; }
+  .nav-left { left: -6px; }
+  .nav-right { right: -6px; }
+  .card { height: 230px; }
+  .track { grid-auto-columns: minmax(240px, 1fr); gap: 18px; }
+}

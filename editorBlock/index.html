@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIHU.STUDIO</title>
+    
+    <!-- Blockly -->
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script defer>
+    <script src="https://unpkg.com/blockly/msg/pt-br.js"></script defer>
+    <script src="https://unpkg.com/blockly/python_compressed.js"></script defer>
+    
+    <!-- Nossos arquivos -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Módulos em ordem correta -->
+    <script src="modules/blockly-setup.js"></script defer>
+    <script src="modules/program-manager.js"></script defer>
+    <script src="modules/serial-terminal.js"></script defer>
+    <script src="modules/ui-handlers.js"></script defer>
+    <script src="main.js"></script defer>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">M</div>
+                MIHU.STUDIO
+            </div>
+
+            <button class="action-btn btn-new" id="newProg">
+                + Programa
+            </button>
+            <button class="action-btn btn-run" id="runBtn">
+                Executar
+            </button>
+            <button class="action-btn btn-run-save" id="runSaveBtn">
+                Executar e Salvar
+            </button>
+            <button class="action-btn btn-stop" id="stopBtn">
+                Stop
+            </button>
+            <button class="action-btn btn-connect" id="connectBtn">
+                Conectar
+            </button>
+            <button class="action-btn btn-mode" id="toggleMode">
+                Modo Código
+            </button>
+            
+        </div>
+        
+
+        <!-- PROGRAM TABS -->
+        <div class="program-tabs" id="programTabs">
+            <!-- Tabs serão geradas dinamicamente -->
+        </div>
+        
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="workspace-panel">
+                <div id="blocklyDiv"></div>
+                
+                <div class="resizer" id="resizer"></div>
+                
+                <div class="code-panel">
+                    <div class="code-header">
+                        Programa
+                    </div>
+                    <textarea id="codeEditor" readonly># Código será gerado aqui</textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TERMINAL -->
+        <div class="terminal">
+            <div class="terminal-header">
+                Terminal
+            </div>
+            <div class="terminal-content" id="terminal"></div>
+            <div class="command-bar">
+                <input type="text" class="command-input" id="command" placeholder="Digite comando">
+                <button class="send-btn" id="sendBtn" disabled>Enviar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

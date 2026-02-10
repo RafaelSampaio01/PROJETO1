@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RSTECH — Seletor de Produto</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body data-page="products">
+  <div class="bg"></div>
+
+  <main class="stage">
+    <header class="hero">
+      <div class="hero-right">
+        <div class="hero-title">MIHU STUDIO </div>
+        <div class="hero-sub">Ambiente de Desenvolvimento</div>
+      </div>
+    </header>
+
+    <section class="carousel">
+      <button class="nav-btn nav-left" id="btnPrev" aria-label="Anterior">
+        <span>‹</span>
+      </button>
+
+      <div class="track" id="productTrack" aria-label="Lista de produtos">
+        <!-- Cards gerados via JS -->
+      </div>
+
+      <button class="nav-btn nav-right" id="btnNext" aria-label="Próximo">
+        <span>›</span>
+      </button>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-line"></div>
+      <div class="footer-text">Copyright © Mihu</div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

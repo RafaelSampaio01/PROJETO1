@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RSTECH — Seletor de Programação</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body data-page="modes">
+  <div class="bg"></div>
+
+  <main class="stage">
+    <header class="hero hero-modes">
+      <div class="hero-left">
+        <button class="back-btn" id="btnBack" type="button" aria-label="Voltar">
+          ← Voltar
+        </button>
+      </div>
+
+      <div class="hero-center">
+        <div class="hero-kicker">Escolha o tipo de programação</div>
+        <div class="hero-product" id="selectedProductLabel">Produto: —</div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-title">MIHU STUDIO</div>
+      </div>
+    </header>
+
+    <section class="carousel modes">
+      <button class="nav-btn nav-left" id="btnPrev" aria-label="Anterior">
+        <span>‹</span>
+      </button>
+
+      <div class="track" id="modeTrack" aria-label="Lista de modos">
+        <!-- Cards gerados via JS -->
+      </div>
+
+      <button class="nav-btn nav-right" id="btnNext" aria-label="Próximo">
+        <span>›</span>
+      </button>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-line"></div>
+      <div class="footer-text">Selecione uma opção para abrir o editor correspondente</div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

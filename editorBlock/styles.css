@@ -1,0 +1,561 @@
+/* ===== VARIÁVEIS GLOBAIS ===== */
+:root {
+    --color-dark: #1a252f;
+    --color-medium: #2c3e50;
+    --color-light: #34495e;
+    --color-accent: #3498db;
+    --color-success: #2ecc71;
+    --color-warning: #f39c12;
+    --color-danger: #e74c3c;
+    --color-text: #ecf0f1;
+    --color-text-muted: #bdc3c7;
+}
+
+/* ===== RESET E BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--color-medium);
+    color: var(--color-text);
+    font-size: 14px;
+}
+
+/* ===== LAYOUT CONTAINER ===== */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: var(--color-dark);
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--color-light);
+    height: 45px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.logo-icon {
+    background: var(--color-accent);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.mode-badge {
+    background: #7f8c8d;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* ===== ACTIONS BAR ===== */
+.actions-bar {
+    background: var(--color-light);
+    padding: 8px 15px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--color-medium);
+    height: 45px;
+    align-items: center;
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.btn-new {
+    background: var(--color-success);
+    color: white;
+}
+
+.btn-run {
+    background: var(--color-success);
+    color: white;
+}
+
+.btn-run-save {
+    background: var(--color-warning);
+    color: white;
+}
+
+.btn-stop {
+    background: var(--color-danger);
+    color: white;
+}
+
+.btn-connect {
+    background: var(--color-accent);
+    color: white;
+}
+
+.btn-mode {
+    background: #95a5a6;
+    color: white;
+}
+
+/* ===== PROGRAM TABS ===== */
+.program-tabs {
+    background: var(--color-medium);
+    padding: 5px 15px;
+    display: flex;
+    gap: 5px;
+    border-bottom: 1px solid var(--color-light);
+    height: 40px;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.program-tab {
+    padding: 4px 15px;
+    background: var(--color-light);
+    border: 1px solid var(--color-medium);
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+    position: relative;
+    color: var(--color-text-muted);
+}
+
+.program-tab.active {
+    background: var(--color-dark);
+    border-bottom: 2px solid var(--color-accent);
+    color: white;
+    font-weight: bold;
+}
+
+.tab-close {
+    margin-left: 8px;
+    color: var(--color-danger);
+    font-weight: bold;
+    opacity: 0;
+}
+
+.program-tab:hover .tab-close {
+    opacity: 1;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+}
+
+.workspace-panel {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+}
+
+#blocklyDiv {
+    flex: 1;
+    background: var(--color-dark);
+}
+
+.code-panel {
+    width: 35%;
+    background: var(--color-medium);
+    border-left: 1px solid var(--color-light);
+    display: flex;
+    flex-direction: column;
+}
+
+.code-header {
+    background: var(--color-light);
+    padding: 8px 15px;
+    font-weight: bold;
+    font-size: 13px;
+    border-bottom: 1px solid var(--color-medium);
+}
+
+#codeEditor {
+    flex: 1;
+    background: var(--color-dark);
+    color: var(--color-text);
+    padding: 10px;
+    overflow: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    border: none;
+    resize: none;
+    line-height: 1.4;
+}
+
+/* ===== TERMINAL ===== */
+.terminal {
+    height: 180px;
+    background: var(--color-dark);
+    border-top: 2px solid var(--color-light);
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-header {
+    background: var(--color-light);
+    padding: 6px 15px;
+    font-weight: bold;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminal-content {
+    flex: 1;
+    padding: 10px 15px;
+    overflow-y: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--color-success);
+    background: var(--color-dark);
+}
+
+.terminal-line {
+    margin: 2px 0;
+}
+
+.line-sys {
+    color: #95a5a6;
+}
+
+.line-in {
+    color: var(--color-accent);
+}
+
+.line-out {
+    color: var(--color-success);
+}
+
+.command-bar {
+    display: flex;
+    padding: 8px 15px;
+    background: var(--color-medium);
+    border-top: 1px solid var(--color-light);
+}
+
+.command-input {
+    flex: 1;
+    background: var(--color-light);
+    border: 1px solid var(--color-medium);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 12px;
+}
+
+.command-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.send-btn {
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 4px;
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.send-btn:disabled {
+    background: #7f8c8d;
+    cursor: not-allowed;
+}
+
+/* ===== RESIZER ===== */
+.resizer {
+    width: 5px;
+    background: var(--color-light);
+    cursor: col-resize;
+    position: relative;
+}
+
+.resizer:hover {
+    background: var(--color-accent);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-medium);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-light);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+}
+
+/* ===== UTILITÁRIOS ===== */
+.hidden {
+    display: none !important;
+}
+
+
+/* ===== ESTILOS ESPECÍFICOS PARA BLOCKLY ===== */
+
+/* Workspace principal do Blockly */
+.blocklyMainBackground {
+    stroke: none !important;
+}
+
+/* Toolbox (categorias à esquerda) */
+.blocklyToolboxDiv {
+    background-color: #2c3e50 !important;
+    border-right: 1px solid #34495e !important;
+}
+
+/* Itens do toolbox */
+.blocklyTreeRow {
+    padding: 12px 16px !important;
+    margin: 4px 8px !important;
+    border-radius: 6px !important;
+    color: #bdc3c7 !important;
+    border: 1px solid transparent !important;
+    transition: all 0.2s ease !important;
+}
+
+.blocklyTreeRow:hover {
+    background-color: #34495e !important;
+    color: #ecf0f1 !important;
+    border-color: #3498db !important;
+}
+
+.blocklyTreeSelected {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+    color: white !important;
+    border-color: #3498db !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Texto do toolbox */
+.blocklyTreeLabel {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+}
+
+/* Flyout (subcategorias) */
+.blocklyFlyout {
+    background-color: #34495e !important;
+    border-right: 1px solid #2c3e50 !important;
+}
+
+.blocklyFlyoutBackground {
+    fill: #34495e !important;
+    fill-opacity: 1 !important;
+}
+
+/* Scrollbars do Blockly */
+.blocklyScrollbarHorizontal,
+.blocklyScrollbarVertical {
+    background-color: #2c3e50 !important;
+}
+
+.blocklyScrollbarHandle {
+    fill: #3498db !important;
+}
+
+/* Blocos */
+.blocklyPath {
+    stroke: #1a252f !important;
+    stroke-width: 1px !important;
+}
+
+/* Texto dentro dos blocos */
+.blocklyText {
+    fill: #000000 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-weight: 500 !important;
+}
+
+/* Campos de entrada nos blocos */
+.blocklyEditableText {
+    fill: #021013 !important;
+}
+
+.blocklyEditableText:hover {
+    fill: #3498db !important;
+}
+
+/* Conectores (entradas/saídas) */
+.blocklyConnection {
+    fill: #2c3e50 !important;
+    stroke: #3498db !important;
+}
+
+.blocklyConnectionHighlight {
+    fill: #3498db !important;
+    stroke: #3498db !important;
+}
+
+/* Trash can (lixeira) */
+.blocklyTrash {
+    fill: #e74c3c !important;
+}
+
+/* Zoom controls */
+.blocklyZoomControl {
+    background-color: #2c3e50 !important;
+    border-radius: 4px !important;
+    border: 1px solid #34495e !important;
+}
+
+.blocklyZoomControl button {
+    background-color: #34495e !important;
+    border-color: #2c3e50 !important;
+    color: #ecf0f1 !important;
+}
+
+.blocklyZoomControl button:hover {
+    background-color: #3498db !important;
+}
+
+/* Grid do workspace */
+.blocklyGrid {
+    stroke: #34495e !important;
+    stroke-width: 1px !important;
+}
+
+/* Drag surface (área de arrasto) */
+.blocklyDragSurface {
+    background-color: rgba(26, 37, 47, 0.9) !important;
+}
+
+/* Tooltip */
+.blocklyTooltipDiv {
+    background-color: #2c3e50 !important;
+    border: 1px solid #34495e !important;
+    color: #ecf0f1 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    padding: 8px 12px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ===== CORES ESPECÍFICAS PARA CATEGORIAS ===== */
+/* Categoria Programa (Azul) */
+.blocklyPath[fill="#3498db"] {
+    fill: #3498db !important;
+}
+
+/* Categoria Texto (Verde) */
+.blocklyPath[fill="#2ecc71"] {
+    fill: #2ecc71 !important;
+}
+
+/* Categoria Lógica (Vermelho) */
+.blocklyPath[fill="#e74c3c"] {
+    fill: #e74c3c !important;
+}
+
+/* Categoria Laços (Laranja) */
+.blocklyPath[fill="#f39c12"] {
+    fill: #f39c12 !important;
+}
+
+/* Categoria Matemática (Roxo) */
+.blocklyPath[fill="#9b59b6"] {
+    fill: #9b59b6 !important;
+}
+
+/* Categoria Variáveis (Marrom) */
+.blocklyPath[fill="#d35400"] {
+    fill: #d35400 !important;
+}
+
+/* Categoria Funções (Roxo escuro) */
+.blocklyPath[fill="#8e44ad"] {
+    fill: #8e44ad !important;
+}
+
+/* ===== ESTILOS PARA WORKSPACE VAZIO ===== */
+#blocklyDiv:empty::before {
+    content: "Arraste blocos aqui para criar seu programa";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #7f8c8d;
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+    width: 80%;
+    pointer-events: none;
+}
+
+/* ===== BLOCO MIHU INIT ESPECIAL ===== */
+.blocklyPath[data-block-type="mihu_init"] {
+    fill: #3498db !important;
+    stroke: #2980b9 !important;
+    stroke-width: 1.5px !important;
+}
+
+/* ===== RESPONSIVIDADE PARA BLOCKLY ===== */
+@media (max-width: 768px) {
+    .blocklyTreeLabel {
+        font-size: 12px !important;
+    }
+    
+    .blocklyTreeRow {
+        padding: 8px 12px !important;
+    }
+}
