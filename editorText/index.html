@@ -13,8 +13,9 @@
 
   <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
-  <div class="app">
+  <div class="app" id="app">
     <header class="topbar">
       <div class="brand">
         <div class="dot"></div>
@@ -25,7 +26,6 @@
       </div>
 
       <div class="toolbar">
-        <!-- ✅ Conectar virou toggle (Conectar/Desconectar) -->
         <button id="btnConnect" class="btn primary">Conectar</button>
 
         <span class="sep"></span>
@@ -48,6 +48,8 @@
           Baud
           <input id="baud" type="number" value="115200" min="1200" step="100">
         </label>
+
+        <button id="btnTour" class="btn">Tutorial</button>
       </div>
 
       <div class="status" id="status">
@@ -63,12 +65,8 @@
           <div class="side-path mono" id="cwd">/</div>
         </div>
 
-        <!-- ✅ Removeu pathInput + botão Ir
-             ✅ Adicionou ações: Nova pasta / Renomear / Deletar
-        -->
         <div class="side-actions">
           <button id="btnUp" class="btn small" disabled title="Pasta acima">..</button>
-
           <button id="btnMkdir" class="btn small" disabled title="Criar pasta">+ Pasta</button>
           <button id="btnRename" class="btn small" disabled title="Renomear selecionado">Renomear</button>
           <button id="btnDeleteSel" class="btn small danger" disabled title="Deletar selecionado">Deletar</button>
@@ -92,10 +90,18 @@
       </section>
     </main>
 
-    <footer class="repl">
+    <!-- REPL -->
+    <footer class="repl" id="repl">
+      <div class="repl-resizer" id="replResizer" title="Arraste para ajustar altura"></div>
+
       <div class="repl-head">
         <div class="repl-title">REPL</div>
-        <div class="repl-hint">Enter envia comando • Ctrl+Enter executa editor</div>
+
+        <div class="repl-right">
+          <div class="repl-hint">Enter envia • Ctrl+Enter executa editor</div>
+          <button id="btnReplMode" class="btn small" disabled title="Modo do REPL">AUTO</button>
+          <button id="btnReplClear" class="btn small" disabled title="Limpar terminal">Limpar</button>
+        </div>
       </div>
 
       <div class="terminal" id="terminal"></div>
@@ -106,15 +112,80 @@
         <button id="btnSend" class="btn small" disabled>Enviar</button>
       </div>
     </footer>
+
+    <!-- Exemplos FIXO -->
+    <button id="btnExamplesFab" class="ex-fab" title="Abrir exemplos">📂 Exemplos</button>
+
+    <div id="examplesDrawer" class="ex-drawer hidden" role="dialog" aria-label="Exemplos">
+      <div class="exd-head">
+        <div>
+          <div class="exd-title">Exemplos</div>
+          <div class="exd-sub mono" id="exRootPath">(nenhuma pasta selecionada)</div>
+        </div>
+        <div class="exd-actions">
+          <button id="btnPickExamples" class="btn small" title="Selecionar pasta de exemplos no PC">Escolher pasta</button>
+          <button id="btnExRefresh" class="btn small" title="Atualizar lista">Atualizar</button>
+          <button id="btnExCloseDrawer" class="btn small" title="Fechar">×</button>
+        </div>
+      </div>
+
+      <div class="exd-tree" id="exTree">
+        <div class="hint">Clique em <span class="mono">Escolher pasta</span> para selecionar os exemplos.</div>
+      </div>
+    </div>
   </div>
 
-  <!-- ✅ Menu de contexto atualizado (sem Baixar; com Renomear/Deletar) -->
+  <!-- Menu de contexto (placa) -->
   <div id="ctx" class="ctxmenu hidden">
     <button data-act="open">Abrir</button>
     <button data-act="cat">Ver conteúdo</button>
     <button data-act="rename">Renomear</button>
     <div class="hr"></div>
     <button data-act="delete" class="danger">Deletar</button>
+  </div>
+
+  <!-- Modal: exemplo somente leitura -->
+  <div id="exModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title" id="exModalTitle">Exemplo</div>
+          <div class="modal-sub mono" id="exModalPath">...</div>
+        </div>
+        <button id="btnExClose" class="btn small">Fechar</button>
+      </div>
+
+      <pre class="modal-code mono" id="exModalCode"></pre>
+
+      <div class="modal-actions">
+        <button id="btnExCopy" class="btn small primary">Copiar</button>
+        <button id="btnExRun" class="btn small success">Rodar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tutorial (estilo Scratch) -->
+  <div id="tour" class="tour hidden" aria-hidden="true">
+    <div class="tour-backdrop" id="tourBackdrop"></div>
+    <div class="tour-highlight" id="tourHL"></div>
+
+    <div class="tour-card" id="tourCard" role="dialog" aria-modal="true" aria-label="Tutorial">
+      <div class="tour-top">
+        <div class="tour-title" id="tourTitle">Tutorial</div>
+        <button id="btnTourEndX" class="btn small" title="Fechar">×</button>
+      </div>
+
+      <div class="tour-body" id="tourBody"></div>
+
+      <div class="tour-footer">
+        <div class="tour-progress mono" id="tourProg">1/1</div>
+        <div class="tour-actions">
+          <button id="btnTourPrev" class="btn small">Voltar</button>
+          <button id="btnTourNext" class="btn small primary">Próximo</button>
+          <button id="btnTourEnd" class="btn small danger">Fechar</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="./main.js"></script>
