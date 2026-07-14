@@ -4,50 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIHU.STUDIO</title>
-    
+
     <!-- Blockly -->
-    <script src="https://unpkg.com/blockly/blockly.min.js"></script defer>
-    <script src="https://unpkg.com/blockly/msg/pt-br.js"></script defer>
-    <script src="https://unpkg.com/blockly/python_compressed.js"></script defer>
-    
-    <!-- Nossos arquivos -->
+    <script src="https://unpkg.com/blockly/blockly.min.js" defer></script>
+    <script src="https://unpkg.com/blockly/python_compressed.js" defer></script>
+    <script src="node_modules/i18next/i18next.min.js" defer></script>
+    <script src="modules/i18n.js?v=20260714" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js" defer></script>
+
+    <!-- Profile da placa -->
+    <script src="src/board/MIHUS3/profile/profile.js" defer></script>
+
+    <!-- Blocos da placa -->
+    <script src="src/board/MIHUS3/blocks/pins-blocks.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/inOut.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/controler.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/operators.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/variables.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/motor.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/sensor.js?v=20260702-sensor-toolbox" defer></script>
+    <script src="src/board/MIHUS3/blocks/controller.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/display.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/mp3.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/wireless.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/oled.js" defer></script>
+    <script src="src/board/MIHUS3/blocks/rgb.js" defer></script>
+
+    <!-- Generators da placa -->
+    <script src="src/board/MIHUS3/generators/pins-generators.js" defer></script>
+    <script src="src/board/MIHUS3/generators/inOut.js" defer></script>
+    <script src="src/board/MIHUS3/generators/controler.js" defer></script>
+    <script src="src/board/MIHUS3/generators/operators.js" defer></script>
+    <script src="src/board/MIHUS3/generators/variables.js" defer></script>
+    <script src="src/board/MIHUS3/generators/motor.js?v=20260702-generator-functional" defer></script>
+    <script src="src/board/MIHUS3/generators/sensor.js?v=20260702-generator-functional" defer></script>
+    <script src="src/board/MIHUS3/generators/controller.js?v=20260702-cooperative-tasks" defer></script>
+    <script src="src/board/MIHUS3/generators/display.js" defer></script>
+    <script src="src/board/MIHUS3/generators/mp3.js" defer></script>
+    <script src="src/board/MIHUS3/generators/wireless.js" defer></script>
+    <script src="src/board/MIHUS3/generators/oled.js" defer></script>
+    <script src="src/board/MIHUS3/generators/rgb.js" defer></script>
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Módulos em ordem correta -->
-    <script src="modules/blockly-setup.js"></script defer>
-    <script src="modules/program-manager.js"></script defer>
-    <script src="modules/serial-terminal.js"></script defer>
-    <script src="modules/ui-handlers.js"></script defer>
-    <script src="main.js"></script defer>
+
+    <!-- Módulos principais -->
+    <script src="modules/blockly-setup.js?v=20260702-cooperative-tasks" defer></script>
+    <script src="modules/program-manager.js?v=20260701-tabs" defer></script>
+    <script src="modules/serial-terminal.js" defer></script>
+    <script src="modules/monaco-editor.js?v=20260714-editable" defer></script>
+    <script src="modules/board-file-manager.js?v=20260714" defer></script>
+    <script src="modules/firmware-updater.js?v=20260714" defer></script>
+    <script src="modules/ui-handlers.js?v=20260702-png-save" defer></script>
+    <script src="main.js?v=20260702-generator-refresh" defer></script>
 </head>
+
+
 <body>
     <div class="container">
         <!-- HEADER -->
         <div class="header">
-            <div class="logo">
-                <div class="logo-icon">M</div>
-                MIHU.STUDIO
+            <div class="topbar-left">
+                <div class="logo">
+                    <div class="logo-badge">MIHU</div>
+                </div>
+
+                <div class="top-menu language-menu">
+                    <button class="top-menu-trigger" type="button" aria-label="Idioma" data-i18n-aria-label="common.language">
+                        <span class="globe-icon">◎</span>
+                        <span class="menu-caret">▾</span>
+                    </button>
+                    <div class="top-dropdown language-dropdown">
+                        <button type="button" data-language="en">English</button>
+                        <button type="button" data-language="zh-CN">简体中文</button>
+                        <button type="button" data-language="ru">Русский</button>
+                        <button type="button" data-language="fr">Français</button>
+                        <button type="button" data-language="it">Italiano</button>
+                        <button type="button" data-language="pt-BR">Português</button>
+                        <button type="button" data-language="de">Deutsch</button>
+                        <button type="button" data-language="es">Español</button>
+                    </div>
+                </div>
+
+                <div class="top-menu">
+                    <button class="top-menu-trigger" type="button" data-i18n="menu.file">Arquivo</button>
+                    <div class="top-dropdown file-dropdown">
+                        <button id="newProg" type="button" data-i18n="file.new">Novo projeto</button>
+                        <button type="button" data-i18n="file.load">Carregar a partir do seu computador</button>
+                        <button type="button" data-i18n="file.saveAs">Salvar como</button>
+                        <button id="exportPngBtn" type="button" data-i18n="file.exportPng">Exportar .png</button>
+                        <button type="button" data-i18n="file.download">Descarregar para o seu computador</button>
+                    </div>
+                </div>
+
+                <div class="top-menu">
+                    <button class="top-menu-trigger" type="button" data-i18n="menu.more">Mais</button>
+                    <div class="top-dropdown more-dropdown">
+                        <button id="openFirmwareUpdater" type="button" data-i18n="more.updater">Atualizador de firmware</button>
+                        <button type="button" data-i18n="more.controllerInfo">Verificar informações do controlador</button>
+                    </div>
+                </div>
+
+                <button class="top-link tutorial-link" type="button"><span class="sun-icon">✹</span> <span data-i18n="menu.tutorials">Tutoriais</span></button>
             </div>
 
-            <button class="action-btn btn-new" id="newProg">
-                + Programa
-            </button>
-            <button class="action-btn btn-run" id="runBtn">
-                Executar
-            </button>
-            <button class="action-btn btn-run-save" id="runSaveBtn">
-                Executar e Salvar
-            </button>
-            <button class="action-btn btn-stop" id="stopBtn">
-                Stop
-            </button>
-            <button class="action-btn btn-connect" id="connectBtn">
-                Conectar
-            </button>
-            <button class="action-btn btn-mode" id="toggleMode">
-                Modo Código
-            </button>
-            
+            <div class="topbar-right">
+                <div class="connection-group" aria-label="Conexão com a controladora" data-i18n-aria-label="connection.groupLabel">
+                    <span class="connection-status-dot" id="connectionStatusDot" aria-hidden="true"></span>
+                    <label class="connection-label" for="connectionType" data-i18n="connection.label">Conexão</label>
+                    <select class="connection-type" id="connectionType" aria-label="Tipo de conexão" data-i18n-aria-label="connection.typeLabel">
+                        <option value="usb">USB</option>
+                        <option value="wifi">Wi-Fi</option>
+                        <option value="bluetooth">Bluetooth</option>
+                    </select>
+                    <button class="top-action-btn connection-button" id="connectBtn" type="button" data-i18n="connection.connect">Conectar</button>
+                </div>
+
+                <div class="program-actions" aria-label="Ações do programa" data-i18n-aria-label="actions.groupLabel">
+                    <button class="top-action-btn action-send" id="runSaveBtn" type="button" title="Enviar e salvar na controladora" data-i18n-title="actions.sendTitle" data-i18n="actions.send">Enviar</button>
+                    <button class="top-action-btn action-run" id="runBtn" type="button" data-i18n="actions.run">Executar</button>
+                    <button class="top-action-btn action-stop" id="stopBtn" type="button" data-i18n="actions.stop">Parar</button>
+                    <button class="top-action-btn action-mode" id="toggleMode" type="button" data-i18n="actions.codeMode">Modo Código</button>
+                </div>
+
+                <span class="version-label" title="Versão do MIHU Studio" data-i18n-title="common.version">v1.0.29</span>
+            </div>
         </div>
         
 
@@ -65,24 +145,117 @@
                 
                 <div class="code-panel">
                     <div class="code-header">
-                        Programa
+                        <span data-i18n="workspace.program">Programa</span>
+                        <div class="code-header-actions">
+                            <span class="code-source-badge" id="codeSourceBadge" data-i18n="editor.generated">Gerado pelos blocos</span>
+                            <button id="resetToBlocksCode" type="button" hidden data-i18n="editor.useBlocks">Usar código dos blocos</button>
+                        </div>
                     </div>
-                    <textarea id="codeEditor" readonly># Código será gerado aqui</textarea>
+                    <div id="codeEditor" aria-label="Editor de código Python" data-i18n-aria-label="editor.label"></div>
                 </div>
             </div>
         </div>
         
+        <div class="terminal-resizer" id="terminalResizer" title="Arraste para redimensionar o terminal" data-i18n-title="terminal.resize"></div>
+
         <!-- TERMINAL -->
         <div class="terminal">
             <div class="terminal-header">
-                Terminal
+                <div class="terminal-tabs" role="tablist">
+                    <button class="terminal-tab is-active" id="terminalTab" type="button" role="tab" aria-selected="true" data-i18n="terminal.title">Terminal</button>
+                    <button class="terminal-tab" id="filesTab" type="button" role="tab" aria-selected="false" data-i18n="files.title">Arquivos</button>
+                </div>
+                <div class="terminal-actions" id="terminalActions">
+                    <button class="terminal-tool-btn" id="clearTerminalBtn" type="button" title="Limpar todas as mensagens do terminal" data-i18n-title="terminal.clearTitle" data-i18n="terminal.clear">Limpar</button>
+                    <button class="terminal-tool-btn" id="lockTerminalScrollBtn" type="button" aria-pressed="false" title="Impedir que novas mensagens movam o scroll" data-i18n-title="terminal.lockTitle" data-i18n="terminal.lock">Travar scroll</button>
+                </div>
+                <div class="terminal-actions" id="fileManagerActions" hidden>
+                    <button class="terminal-tool-btn" id="refreshFilesBtn" type="button" data-i18n="files.refresh">Atualizar</button>
+                    <button class="terminal-tool-btn file-save-btn" id="saveBoardFileBtn" type="button" disabled data-i18n="files.save">Salvar na placa</button>
+                </div>
             </div>
-            <div class="terminal-content" id="terminal"></div>
-            <div class="command-bar">
-                <input type="text" class="command-input" id="command" placeholder="Digite comando">
-                <button class="send-btn" id="sendBtn" disabled>Enviar</button>
+            <div class="terminal-pane" id="terminalPane">
+                <div class="terminal-content" id="terminal"></div>
+                <div class="command-bar">
+                    <input type="text" class="command-input" id="command" placeholder="Digite comando" data-i18n-placeholder="terminal.commandPlaceholder">
+                    <button class="send-btn" id="sendBtn" disabled data-i18n="terminal.send">Enviar</button>
+                </div>
+            </div>
+            <div class="board-files-pane" id="filesPane" hidden>
+                <aside class="board-file-sidebar">
+                    <div class="board-root"><span>📦</span><strong>MIHU-S3 /</strong></div>
+                    <div class="board-file-status" id="boardFileStatus" data-i18n="files.connectHint">Conecte a controladora para carregar os arquivos.</div>
+                    <div class="board-file-tree" id="boardFileTree" role="tree"></div>
+                </aside>
+                <div class="board-file-editor-wrap">
+                    <div class="board-file-path" id="boardFilePath" data-i18n="files.selectHint">Selecione um arquivo para editar</div>
+                    <div id="boardFileEditor" aria-label="Editor de arquivos da controladora" data-i18n-aria-label="files.editorLabel"></div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal-backdrop" id="firmwareModal" hidden>
+        <section class="firmware-modal" role="dialog" aria-modal="true" aria-labelledby="firmwareModalTitle">
+            <header class="firmware-modal-header">
+                <div>
+                    <span class="firmware-kicker">ESP32-S3</span>
+                    <h2 id="firmwareModalTitle" data-translate>Atualizar firmware</h2>
+                </div>
+                <button class="modal-close" id="closeFirmwareUpdater" type="button" aria-label="Fechar" data-i18n-aria-label="common.close">×</button>
+            </header>
+            <div class="firmware-modal-body">
+                <div class="firmware-connect-gate" id="firmwareConnectGate">
+                    <span class="firmware-step-number">1</span>
+                    <div>
+                        <strong data-translate>Selecione a porta da controladora</strong>
+                        <p data-translate>O MIHU Studio verificará automaticamente se ela está pronta para atualização.</p>
+                    </div>
+                    <button class="primary-modal-btn" id="connectForFirmware" type="button" data-translate>Verificar porta USB</button>
+                </div>
+                <div class="firmware-auto-file" id="firmwareAutoFile" hidden>
+                    <span data-translate>Firmware completo</span>
+                    <strong id="firmwareAutoFileName" data-i18n="firmware.searching">Procurando firmware.bin...</strong>
+                    <small id="firmwareAutoFileInfo" data-i18n="firmware.address">Endereço automático: 0x0</small>
+                </div>
+                <div class="boot-mode-guide" id="firmwareBootGuide" hidden>
+                    <div class="boot-mode-copy">
+                        <span class="boot-mode-title" data-i18n="firmware.bootTitle">Coloque o ESP32-S3 em modo de atualização</span>
+                        <ol>
+                            <li data-i18n="firmware.boot1">Se a porta aparecer como MIHU S3, cancele a seleção.</li>
+                            <li data-i18n="firmware.boot2">Segure o botão BOOT.</li>
+                            <li data-i18n="firmware.boot3">Pressione e solte o botão RESET.</li>
+                            <li data-i18n="firmware.boot4">Solte o botão BOOT.</li>
+                            <li data-i18n="firmware.boot5">Selecione USB JTAG/serial debug unit.</li>
+                        </ol>
+                    </div>
+                    <div class="boot-buttons-image-wrap" id="bootButtonsImageWrap">
+                        <img id="bootButtonsImage" alt="Localização dos botões BOOT e RESET no controlador" data-i18n-alt="firmware.imageAlt" hidden>
+                        <span id="bootButtonsImagePlaceholder" data-i18n="firmware.imagePlaceholder">Imagem dos botões BOOT + RESET</span>
+                        <div class="hardware-marker marker-boot" aria-hidden="true">
+                            <span class="marker-pin"></span>
+                            <strong>1·3</strong>
+                            <span data-i18n="firmware.holdRelease">SEGURE / SOLTE BOOT</span>
+                        </div>
+                        <div class="hardware-marker marker-reset" aria-hidden="true">
+                            <span class="marker-pin"></span>
+                            <strong>2</strong>
+                            <span data-i18n="firmware.pressReset">PRESSIONE RESET</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="firmware-progress" id="firmwareProgress" hidden>
+                    <div class="firmware-progress-track"><span id="firmwareProgressBar"></span></div>
+                    <span id="firmwareProgressText" data-i18n="firmware.preparing">Preparando...</span>
+                </div>
+                <div class="firmware-message" id="firmwareMessage" role="status"></div>
+            </div>
+            <footer class="firmware-modal-footer">
+                <button class="secondary-modal-btn" id="cancelFirmwareUpdater" type="button" data-translate>Cancelar</button>
+                <button class="primary-modal-btn" id="retryFirmwarePort" type="button" hidden data-translate>Verificar novamente</button>
+                <button class="primary-modal-btn" id="startFirmwareUpdate" type="button" hidden data-translate>Atualizar firmware</button>
+            </footer>
+        </section>
     </div>
 </body>
 </html>

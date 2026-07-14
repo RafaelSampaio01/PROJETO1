@@ -1,0 +1,488 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+
+
+<category name="Controle" colour="#ffab19">
+
+    <block type="mihu_control_wait">
+        <value name="SECONDS">
+            <shadow type="math_number">
+                <field name="NUM">1</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_control_repeat">
+        <value name="TIMES">
+            <shadow type="math_number">
+                <field name="NUM">10</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_control_forever"></block>
+
+    <block type="mihu_control_if">
+        <value name="COND">
+            <shadow type="logic_boolean">
+                <field name="BOOL">TRUE</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_control_if_else">
+        <value name="COND">
+            <shadow type="logic_boolean">
+                <field name="BOOL">TRUE</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_control_wait_until">
+        <value name="COND">
+            <shadow type="logic_boolean">
+                <field name="BOOL">TRUE</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_control_repeat_until">
+        <value name="COND">
+            <shadow type="logic_boolean">
+                <field name="BOOL">TRUE</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_control_stop"></block>
+
+</category>
+
+    <category name="Operadores" colour="#34a853">
+
+        <block type="mihu_operator_arithmetic">
+            <field name="OP">ADD</field>
+            <value name="A">
+                <shadow type="math_number">
+                    <field name="NUM"></field>
+                </shadow>
+            </value>
+            <value name="B">
+                <shadow type="math_number">
+                    <field name="NUM"></field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_compare">
+            <field name="OP">GT</field>
+            <value name="A">
+                <shadow type="math_number">
+                    <field name="NUM"></field>
+                </shadow>
+            </value>
+            <value name="B">
+                <shadow type="math_number">
+                    <field name="NUM">50</field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_boolean">
+            <field name="OP">OR</field>
+        </block>
+
+
+        <block type="mihu_operator_not"></block>
+
+
+        <block type="mihu_operator_random">
+            <value name="FROM">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_join">
+            <value name="A">
+                <shadow type="text">
+                    <field name="TEXT">apple</field>
+                </shadow>
+            </value>
+            <value name="B">
+                <shadow type="text">
+                    <field name="TEXT">banana</field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_letter_of">
+            <value name="INDEX">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">apple</field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_length">
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">apple</field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_contains">
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">apple</field>
+                </shadow>
+            </value>
+            <value name="SUBTEXT">
+                <shadow type="text">
+                    <field name="TEXT">a</field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_mod">
+            <value name="A">
+                <shadow type="math_number">
+                    <field name="NUM"></field>
+                </shadow>
+            </value>
+            <value name="B">
+                <shadow type="math_number">
+                    <field name="NUM"></field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_round">
+            <value name="VALUE">
+                <shadow type="math_number">
+                    <field name="NUM"></field>
+                </shadow>
+            </value>
+        </block>
+
+
+        <block type="mihu_operator_abs">
+            <value name="VALUE">
+                <shadow type="math_number">
+                    <field name="NUM"></field>
+                </shadow>
+            </value>
+        </block>
+
+    </category>
+
+    <category name="Variáveis" colour="#ff7f1a">
+        <button text="Criar uma variável" callbackKey="MIHU_CREATE_VARIABLE"></button>
+
+        <block type="mihu_variable_get">
+            <field name="VAR">variável</field>
+        </block>
+
+        <block type="mihu_variable_set">
+            <field name="VAR">variável</field>
+            <value name="VALUE">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mihu_variable_change">
+            <field name="VAR">variável</field>
+            <value name="VALUE">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mihu_variable_show">
+            <field name="VAR">variável</field>
+        </block>
+
+        <block type="mihu_variable_hide">
+            <field name="VAR">variável</field>
+        </block>
+    </category>
+
+    <category name="Os Meus Blocos" colour="#ff6680">
+        <button text="Criar um Bloco" callbackKey="MIHU_CREATE_BLOCK"></button>
+    </category>
+
+    <category name="motor" colour="#6f7f8f">
+        <block type="mihu_motor_interface">
+            <field name="MOTOR">M1</field>
+            <value name="POWER">
+                <shadow type="math_number">
+                    <field name="NUM">50</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mihu_motor_set_code">
+            <field name="MOTOR">M1</field>
+        </block>
+
+        <block type="mihu_motor_get_code">
+            <field name="MOTOR">M1</field>
+        </block>
+
+        <block type="mihu_motor_wait_angle">
+            <field name="MOTOR">M1</field>
+            <value name="SPEED">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+            <value name="ANGLE">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mihu_motor_servo_angle">
+            <field name="MOTOR">M1</field>
+            <value name="SPEED">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+            <value name="ANGLE">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+
+    </category>
+
+    <category name="sensor" colour="#1fa463">
+        <block type="mihu_sensor_cor"></block>
+        <block type="mihu_sensor_ultrasonico"></block>
+        <block type="mihu_sensor_giroscopio"></block>
+        <block type="mihu_sensor_temperatura"></block>
+        <block type="mihu_sensor_botao"></block>
+        <block type="mihu_sensor_som"></block>
+    </category>
+
+    <category name="controlador" colour="#5aa7f2">
+        <block type="mihu_controller_target"></block>
+        <block type="mihu_controller_button"></block>
+        <block type="mihu_controller_read_system_time"></block>
+        <block type="mihu_controller_buzzer"></block>
+        <block type="mihu_controller_in_voltage"></block>
+        <block type="mihu_controller_audio_frequency"></block>
+    </category>
+
+<category name="display" colour="#f5a5bd">
+
+    <block type="mihu_oled_facil_limpar"></block>
+
+    <block type="mihu_oled_facil_escrever">
+        <value name="TEXT"><shadow type="text"><field name="TEXT">Olá</field></shadow></value>
+    </block>
+
+    <block type="mihu_oled_facil_centralizar">
+        <value name="TEXT"><shadow type="text"><field name="TEXT">Título</field></shadow></value>
+    </block>
+
+    <block type="mihu_oled_facil_limpar_area"></block>
+
+    <block type="mihu_oled_facil_simbolo"></block>
+
+    <block type="mihu_display_value">
+        <value name="COL"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+        <value name="ROW"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+        <value name="VAR"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+    </block>
+
+    <block type="mihu_display_string">
+        <value name="COL"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+        <value name="ROW"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+        <value name="VALUE"><shadow type="text"><field name="TEXT"></field></shadow></value>
+    </block>
+
+    <block type="mihu_display_lcd_backlight"></block>
+
+    <block type="mihu_display_point">
+        <value name="X"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="Y"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+    </block>
+
+    <block type="mihu_display_line">
+        <value name="X"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+        <value name="Y"><shadow type="math_number"><field name="NUM">15</field></shadow></value>
+        <value name="ANGLE"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="WIDTH"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
+    </block>
+
+    <block type="mihu_display_circle">
+        <value name="X"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="Y"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="RADIUS"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+    </block>
+
+    <block type="mihu_display_rectangle">
+        <value name="X"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="Y"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="WIDTH"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
+    </block>
+
+    <block type="mihu_display_fill_rectangle">
+        <value name="X"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="Y"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="WIDTH"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
+    </block>
+
+    <block type="mihu_display_image">
+        <value name="X"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="Y"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+        <value name="ARQ"><shadow type="text"><field name="TEXT">a.jpg</field></shadow></value>
+        <value name="SCALE"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+    </block>
+</category>
+
+<category name="MP3" colour="#008d8f">
+    <block type="mihu_mp3_play_file">
+        <value name="FILE">
+            <shadow type="math_number">
+                <field name="NUM">1</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_mp3_pause"></block>
+
+    <block type="mihu_mp3_next"></block>
+
+    <block type="mihu_mp3_previous"></block>
+</category>
+
+<category name="sem fio" colour="#5c6eb3">
+    <block type="mihu_wireless_get_data"></block>
+
+    <block type="mihu_wireless_get_puller"></block>
+
+    <block type="mihu_wireless_get_button"></block>
+
+    <block type="mihu_wireless_udp_remote">
+        <value name="IP">
+            <shadow type="text">
+                <field name="TEXT">192.168.1.1</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_wireless_set_data">
+        <value name="DATA">
+            <shadow type="math_number">
+                <field name="NUM">255</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_wireless_get_voice">
+        <value name="VOICE">
+            <shadow type="text">
+                <field name="TEXT">hello</field>
+            </shadow>
+        </value>
+    </block>
+
+    <block type="mihu_wireless_voice_line">
+        <value name="LINE">
+            <shadow type="math_number">
+                <field name="NUM">1</field>
+            </shadow>
+        </value>
+    </block>
+</category>
+
+<category name="input" colour="#6c55a3">
+
+    <block type="rgb_clear"></block>
+
+    <block type="rgb_all_palette">
+        <value name="BRIGHTNESS"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+    </block>
+
+    <block type="rgb_set">
+        <value name="LED"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="R"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="G"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="B"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="BRIGHTNESS"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+    </block>
+
+    <block type="rgb_left">
+        <value name="R"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="G"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="B"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="BRIGHTNESS"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+    </block>
+
+    <block type="rgb_right">
+        <value name="R"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="G"> <shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="B"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="BRIGHTNESS"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+    </block>
+
+    <block type="rgb_range">
+        <value name="START"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="END"><shadow type="math_number"><field name="NUM">5</field></shadow></value>
+        <value name="R"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="G"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="B"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="BRIGHTNESS"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+    </block>
+
+    <block type="rgb_sym">
+        <value name="LED"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        <value name="R"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="G"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="B"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+        <value name="BRIGHTNESS"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+    </block>
+
+    <block type="rgb_reflectance">
+        <value name="VALUE"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
+        <value name="BRIGHTNESS"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+    </block>
+
+    <block type="rgb_ultrasonic">
+        <value name="DISTANCE"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
+        <value name="BRIGHTNESS"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+        <value name="MIN"><shadow type="math_number"><field name="NUM">3</field></shadow></value>
+        <value name="MAX"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+    </block>
+
+</category>
+
+
+</xml>

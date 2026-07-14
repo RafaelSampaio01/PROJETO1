@@ -1,0 +1,11 @@
+{
+    "id": "MIHUS3",
+    "name": "MIHU S3",
+    "description": "Placa baseada em ESP32-S3 para programação em MicroPython.",
+    "language": "python",
+    "toolbox": "toolbox.xml",
+    "blocksPath": "blocks/",
+    "generatorsPath": "generators/",
+    "profilePath": "profile/profile.js",
+    "mediaPath": "media/"
+}

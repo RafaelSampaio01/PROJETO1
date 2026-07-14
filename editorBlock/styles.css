@@ -19,7 +19,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     height: 100vh;
     overflow: hidden;
     background: var(--color-medium);
@@ -34,35 +34,274 @@ body {
     height: 100vh;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER / TOPBAR ===== */
 .header {
-    background: var(--color-dark);
-    padding: 8px 15px;
+    background: #182433;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
-    border-bottom: 2px solid var(--color-light);
-    height: 45px;
+    border-bottom: 1px solid #2c3d52;
+    height: 48px;
+    min-height: 48px;
+    color: #f4f8ff;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+    z-index: 20;
+}
+
+.topbar-left,
+.topbar-right {
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
+}
+
+.topbar-left {
+    flex: 1;
+}
+
+.topbar-right {
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: bold;
+    justify-content: center;
+    width: 82px;
+    padding: 0 10px;
+    border-right: 1px solid #2c3d52;
+    background: #16202d;
+}
+
+.logo-badge {
+    color: #ff9f1c;
+    background: #ffffff;
+    border: 2px solid #ff9f1c;
+    border-radius: 7px;
+    padding: 2px 5px;
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0;
+    text-shadow: 0 1px 0 #ffffff;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+}
+
+.top-menu {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+}
+
+.top-menu-trigger,
+.top-link {
+    height: 48px;
+    border: 0;
+    border-right: 1px solid #2c3d52;
+    background: transparent;
+    color: #f4f8ff;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.top-menu-trigger:hover,
+.top-link:hover,
+.top-menu:hover > .top-menu-trigger {
+    background: #22344a;
+}
+
+.language-menu .top-menu-trigger {
+    width: 56px;
+    justify-content: center;
     font-size: 18px;
 }
 
-.logo-icon {
-    background: var(--color-accent);
-    color: white;
-    width: 28px;
-    height: 28px;
-    border-radius: 4px;
-    display: flex;
+.globe-icon {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    border: 2px solid #dceeff;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.menu-caret {
+    font-size: 10px;
+}
+
+.sun-icon {
+    color: #f6d15f;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff2f2f;
+    box-shadow: 0 0 0 2px rgba(255, 47, 47, 0.18);
+}
+
+.top-dropdown {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    display: none;
+    flex-direction: column;
+    min-width: 220px;
+    background: #26384d;
+    border: 1px solid #416083;
+    border-top: 0;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    padding: 6px 0;
+    z-index: 50;
+}
+
+.top-menu:hover .top-dropdown,
+.top-menu:focus-within .top-dropdown {
+    display: flex;
+}
+
+.top-dropdown button {
+    border: 0;
+    background: transparent;
+    color: #eff6ff;
+    text-align: left;
+    min-height: 32px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.top-dropdown button:hover,
+.top-dropdown button.is-active {
+    background: #3f8efc;
+    color: #ffffff;
+}
+
+.language-dropdown {
+    min-width: 158px;
+}
+
+.file-dropdown {
+    min-width: 280px;
+}
+
+.more-dropdown {
+    min-width: 240px;
+}
+
+.version-label {
+    color: #8295aa;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.connection-group,
+.program-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.connection-group {
+    height: 34px;
+    padding: 3px 4px 3px 9px;
+    border: 1px solid #344a62;
+    border-radius: 7px;
+    background: #14202d;
+}
+
+.connection-label {
+    color: #91a4b8;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.connection-status-dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 50%;
+    background: #718096;
+    box-shadow: 0 0 0 2px rgba(113, 128, 150, 0.16);
+}
+
+.connection-status-dot.is-connected {
+    background: #32d583;
+    box-shadow: 0 0 0 2px rgba(50, 213, 131, 0.18);
+}
+
+.connection-type {
+    height: 26px;
+    min-width: 86px;
+    border: 0;
+    border-left: 1px solid #344a62;
+    background: #14202d;
+    color: #e8f1fb;
+    padding: 0 22px 0 8px;
+    font: 600 11px "Segoe UI", sans-serif;
+    cursor: pointer;
+    outline: none;
+}
+
+.connection-type:disabled { cursor: default; opacity: 0.65; }
+
+.program-actions {
+    padding-left: 10px;
+    border-left: 1px solid #304256;
+}
+
+.top-action-btn {
+    height: 30px;
+    min-width: 62px;
+    border: 1px solid #40566e;
+    border-radius: 5px;
+    background: #26384b;
+    color: #edf5ff;
+    padding: 0 11px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.top-action-btn:hover { background: #344c64; border-color: #587492; }
+.top-action-btn:disabled { cursor: default; opacity: 0.5; }
+.connection-button { min-width: 72px; border-color: #357fc7; background: #2468a8; }
+.connection-button:hover { background: #2d7ec7; border-color: #57a0e5; }
+.action-run { border-color: #279766; background: #207b55; }
+.action-run:hover { background: #279766; border-color: #38b77e; }
+.action-stop { min-width: 54px; border-color: #8c4850; background: #62353b; }
+.action-stop:hover { background: #81434b; border-color: #ad5a65; }
+.action-mode { min-width: 91px; }
+
+@media (max-width: 1180px) {
+    .tutorial-link,
+    .connection-label,
+    .version-label { display: none; }
+    .top-menu-trigger,
+    .top-link { padding-left: 10px; padding-right: 10px; }
 }
 
 .mode-badge {
@@ -86,11 +325,12 @@ body {
 }
 
 .action-btn {
-    padding: 6px 12px;
+    min-height: 30px;
+    padding: 6px 11px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -100,7 +340,6 @@ body {
 
 .action-btn:hover {
     opacity: 0.9;
-    transform: translateY(-1px);
 }
 
 .action-btn:active {
@@ -128,55 +367,100 @@ body {
 }
 
 .btn-connect {
-    background: var(--color-accent);
+    background: #2d7dd2;
     color: white;
 }
 
 .btn-mode {
-    background: #95a5a6;
+    background: #506377;
     color: white;
 }
 
 /* ===== PROGRAM TABS ===== */
 .program-tabs {
-    background: var(--color-medium);
-    padding: 5px 15px;
+    background: #1b2938;
+    padding: 6px 12px 0;
     display: flex;
-    gap: 5px;
-    border-bottom: 1px solid var(--color-light);
+    gap: 4px;
+    border-bottom: 1px solid #31465d;
     height: 40px;
-    align-items: center;
+    min-height: 40px;
+    align-items: flex-end;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .program-tab {
-    padding: 4px 15px;
-    background: var(--color-light);
-    border: 1px solid var(--color-medium);
-    border-radius: 4px 4px 0 0;
+    min-width: 132px;
+    height: 34px;
+    padding: 0 10px 0 14px;
+    background: #26384d;
+    border: 1px solid #3b536d;
+    border-bottom: 0;
+    border-radius: 7px 7px 0 0;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     white-space: nowrap;
     position: relative;
-    color: var(--color-text-muted);
+    color: #d6e4f4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .program-tab.active {
-    background: var(--color-dark);
-    border-bottom: 2px solid var(--color-accent);
+    background: #31465d;
+    border-color: #4c8fd8;
+    border-top: 2px solid #4c8fd8;
     color: white;
     font-weight: bold;
 }
 
+.tab-name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tab-menu-wrap { position: relative; display: inline-flex; align-items: center; }
+.tab-menu-btn { width: 22px; height: 25px; border: 0; border-radius: 4px; background: transparent; color: #b9c9d9; cursor: pointer; font-size: 18px; line-height: 1; }
+.tab-menu-btn:hover, .tab-menu-btn[aria-expanded="true"] { color: #fff; background: #40566e; }
+.program-tab-menu { position: fixed; z-index: 800; min-width: 150px; padding: 4px; border: 1px solid #4a6179; border-radius: 5px; background: #1c2a39; box-shadow: 0 8px 18px rgba(0,0,0,.38); }
+.program-tab-menu[hidden] { display: none; }
+.program-tab-menu button { width: 100%; border: 0; border-radius: 3px; padding: 7px 9px; background: transparent; color: #eaf2fa; text-align: left; white-space: nowrap; cursor: pointer; font-size: 12px; }
+.program-tab-menu button:hover { background: #2d7dd2; color: #fff; }
+
 .tab-close {
-    margin-left: 8px;
-    color: var(--color-danger);
+    color: #ff7b7b;
     font-weight: bold;
-    opacity: 0;
+    opacity: 0.7;
+    line-height: 1;
 }
 
 .program-tab:hover .tab-close {
     opacity: 1;
+}
+
+.program-tab-add {
+    width: 32px;
+    height: 30px;
+    margin-bottom: 2px;
+    border: 1px solid #3b536d;
+    border-radius: 6px 6px 0 0;
+    background: #22344a;
+    color: #dcecff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.program-tab-add:hover {
+    background: #2d7dd2;
+    color: #ffffff;
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -211,20 +495,28 @@ body {
     font-weight: bold;
     font-size: 13px;
     border-bottom: 1px solid var(--color-medium);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }
+
+.code-header-actions { display: flex; align-items: center; gap: 8px; }
+.code-source-badge { color: #a9bdcf; font-size: 11px; font-weight: 500; }
+.code-source-badge.is-custom { color: #ffd166; }
+#resetToBlocksCode { border: 1px solid #58728c; border-radius: 4px; background: #26394c; color: #fff; padding: 3px 8px; cursor: pointer; font-size: 11px; }
+#resetToBlocksCode:hover { background: #36516b; }
 
 #codeEditor {
     flex: 1;
     background: var(--color-dark);
     color: var(--color-text);
-    padding: 10px;
+    min-width: 0;
+    min-height: 0;
     overflow: auto;
-    font-family: 'Consolas', 'Monaco', monospace;
+    font-family: "Consolas", "Monaco", monospace;
     font-size: 13px;
-    white-space: pre-wrap;
     border: none;
-    resize: none;
-    line-height: 1.4;
 }
 
 /* ===== TERMINAL ===== */
@@ -250,7 +542,7 @@ body {
     flex: 1;
     padding: 10px 15px;
     overflow-y: auto;
-    font-family: 'Consolas', 'Monaco', monospace;
+    font-family: "Consolas", "Monaco", monospace;
     font-size: 12px;
     line-height: 1.4;
     color: var(--color-success);
@@ -287,7 +579,7 @@ body {
     color: white;
     padding: 6px 10px;
     border-radius: 4px;
-    font-family: 'Consolas', 'Monaco', monospace;
+    font-family: "Consolas", "Monaco", monospace;
     font-size: 12px;
 }
 
@@ -315,7 +607,7 @@ body {
 
 /* ===== RESIZER ===== */
 .resizer {
-    width: 5px;
+    flex: 0 0 7px;
     background: var(--color-light);
     cursor: col-resize;
     position: relative;
@@ -325,7 +617,7 @@ body {
     background: var(--color-accent);
 }
 
-/* ===== SCROLLBAR ===== */
+/* ===== SCROLLBAR GERAL ===== */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -349,51 +641,404 @@ body {
     display: none !important;
 }
 
+/* ========================================================= */
+/* =================== ESTILOS DO BLOCKLY ================= */
+/* ========================================================= */
 
-/* ===== ESTILOS ESPECÍFICOS PARA BLOCKLY ===== */
-
-/* Workspace principal do Blockly */
+/* Workspace principal */
 .blocklyMainBackground {
     stroke: none !important;
 }
 
-/* Toolbox (categorias à esquerda) */
+/* Toolbox lateral */
 .blocklyToolboxDiv {
-    background-color: #2c3e50 !important;
-    border-right: 1px solid #34495e !important;
+    width: 96px !important;
+    background-color: #1f2933 !important;
+    border-right: 1px solid #2f3b4a !important;
+    box-shadow: 1px 0 0 rgba(0, 0, 0, 0.3) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
 }
 
-/* Itens do toolbox */
-.blocklyTreeRow {
-    padding: 12px 16px !important;
-    margin: 4px 8px !important;
-    border-radius: 6px !important;
-    color: #bdc3c7 !important;
-    border: 1px solid transparent !important;
-    transition: all 0.2s ease !important;
+.terminal-tabs { display: flex; align-items: center; align-self: stretch; gap: 3px; }
+.terminal-tab { border: 0; border-bottom: 2px solid transparent; background: transparent; color: #b8c8d8; padding: 5px 10px; cursor: pointer; font-size: 12px; font-weight: 700; }
+.terminal-tab:hover { color: #fff; background: rgba(255,255,255,.05); }
+.terminal-tab.is-active { color: #fff; border-bottom-color: var(--color-accent); }
+.terminal-pane { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.board-files-pane { flex: 1; min-height: 0; display: flex; background: #151d26; }
+.board-files-pane[hidden], .terminal-pane[hidden] { display: none; }
+.board-file-sidebar { width: 280px; min-width: 180px; max-width: 45%; overflow: auto; border-right: 1px solid #405268; background: #172330; }
+.board-root { display: flex; gap: 7px; align-items: center; padding: 8px 10px; border-bottom: 1px solid #34495e; color: #e8f1fb; }
+.board-file-status { margin: 8px; padding: 8px; color: #9db0c2; font-size: 11px; line-height: 1.35; border: 1px dashed #435a72; border-radius: 4px; }
+.board-file-status:empty { display: none; }
+.board-file-tree { padding: 4px 0 10px; font: 12px/1.45 Consolas, Monaco, monospace; }
+.file-tree-row { display: flex; align-items: center; gap: 6px; min-height: 25px; padding: 3px 8px; cursor: pointer; white-space: nowrap; color: #d7e2ec; }
+.file-tree-row:hover { background: #26394c; }
+.file-tree-row.is-active { background: #3c536a; color: #fff; }
+.file-tree-row.is-folder { font-weight: 700; }
+.file-tree-children[hidden] { display: none; }
+.file-tree-caret { width: 10px; color: #91a6b9; }
+.file-tree-icon { width: 16px; text-align: center; }
+.board-file-editor-wrap { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.board-file-path { min-height: 28px; padding: 6px 12px; border-bottom: 1px solid #34495e; color: #9fc8ed; background: #1d2b3a; font: 12px Consolas, Monaco, monospace; }
+#boardFileEditor { flex: 1; min-height: 0; }
+.file-save-btn:not(:disabled) { border-color: #2a9d63; background: #1f754c; }
+.file-save-btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.terminal-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.terminal-actions[hidden] { display: none !important; }
+.terminal.file-manager-open { min-height: 300px; }
+
+.terminal-tool-btn {
+    border: 1px solid #58728c;
+    border-radius: 4px;
+    background: #26394c;
+    color: #e8f1fb;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.blocklyTreeRow:hover {
-    background-color: #34495e !important;
-    color: #ecf0f1 !important;
-    border-color: #3498db !important;
+.terminal-tool-btn:hover { background: #36516b; }
+.terminal-tool-btn.is-active { border-color: #f0b44d; background: #6b4e1f; color: #fff3d6; }
+
+.terminal-resizer {
+    height: 7px;
+    flex: 0 0 7px;
+    background: var(--color-light);
+    cursor: row-resize;
 }
 
-.blocklyTreeSelected {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
-    color: white !important;
-    border-color: #3498db !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+.terminal-resizer:hover { background: var(--color-accent); }
+.is-resizing { user-select: none; }
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(7, 13, 21, 0.72);
+    backdrop-filter: blur(3px);
 }
 
-/* Texto do toolbox */
-.blocklyTreeLabel {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+.modal-backdrop[hidden] { display: none; }
+.modal-open { overflow: hidden; }
+
+.firmware-modal {
+    width: min(560px, 100%);
+    max-height: calc(100vh - 32px);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #45617e;
+    border-radius: 12px;
+    background: #172534;
+    color: #edf5ff;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: width 0.2s ease;
+}
+
+.firmware-modal.is-boot-step { width: min(820px, 100%); }
+
+.firmware-modal-header,
+.firmware-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #1d3043;
+}
+
+.firmware-modal-header { border-bottom: 1px solid #344b63; }
+.firmware-modal-footer { justify-content: flex-end; border-top: 1px solid #344b63; }
+.firmware-modal h2 { margin-top: 2px; font-size: 20px; }
+.firmware-kicker { color: #67b7ff; font-size: 10px; font-weight: 800; letter-spacing: 0.12em; }
+.modal-close { border: 0; background: transparent; color: #afc2d5; font-size: 28px; cursor: pointer; }
+.modal-close:hover { color: #fff; }
+.firmware-modal-body { padding: 20px; overflow-y: auto; }
+.firmware-help { color: #afc2d5; font-size: 13px; line-height: 1.5; }
+.firmware-help code { color: #8ed0ff; }
+.firmware-field { margin-top: 17px; }
+.firmware-field > label { display: block; margin-bottom: 7px; color: #dbe8f5; font-size: 12px; font-weight: 700; }
+.firmware-field select { width: 100%; height: 38px; border: 1px solid #45617e; border-radius: 6px; background: #101c28; color: #edf5ff; padding: 0 10px; }
+.firmware-select-row { display: flex; gap: 8px; }
+.firmware-select-row select { flex: 1; min-width: 0; }
+.firmware-file-info { display: block; min-height: 17px; margin-top: 5px; color: #8fa7bd; font-size: 11px; }
+.secondary-modal-btn,
+.primary-modal-btn { height: 38px; border-radius: 6px; padding: 0 14px; font-size: 12px; font-weight: 700; cursor: pointer; }
+.secondary-modal-btn { border: 1px solid #45617e; background: #263b50; color: #e7f1fb; }
+.primary-modal-btn { border: 1px solid #318cce; background: #2476b5; color: white; }
+.secondary-modal-btn:hover { background: #334d65; }
+.primary-modal-btn:hover { background: #2d8bd0; }
+.primary-modal-btn:disabled { cursor: default; opacity: 0.45; }
+.firmware-confirm { display: flex; align-items: flex-start; gap: 9px; margin-top: 18px; color: #c5d5e4; font-size: 12px; line-height: 1.4; }
+.firmware-confirm input { margin-top: 2px; accent-color: #2d8bd0; }
+.firmware-port-confirm { margin-top: 14px; }
+
+.boot-mode-guide {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid #53677c;
+    border-radius: 8px;
+    background: #101d29;
+}
+
+.boot-mode-title { display: block; margin-bottom: 7px; color: #ffd27a; font-size: 12px; font-weight: 800; }
+.boot-mode-copy ol { padding-left: 18px; color: #c6d5e3; font-size: 11px; line-height: 1.55; }
+.boot-mode-copy ol {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 7px;
+    padding: 0;
+    list-style-position: inside;
+}
+.boot-mode-copy li {
+    min-height: 48px;
+    padding: 8px;
+    border-radius: 6px;
+    background: #172a3b;
+    color: #c9d8e6;
+}
+.boot-mode-copy strong { color: #fff; }
+.boot-buttons-image-wrap {
+    position: relative;
+    width: min(680px, 100%);
+    aspect-ratio: 1536 / 1216;
+    margin: 2px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px dashed #53677c;
+    border-radius: 7px;
+    background: #172838;
+    color: #7990a5;
+    text-align: center;
+    font-size: 11px;
+}
+.boot-buttons-image-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.boot-buttons-image-wrap img[hidden],
+#bootButtonsImagePlaceholder[hidden] { display: none; }
+.boot-buttons-image-wrap small { color: #aabccc; font-weight: 700; }
+
+.hardware-marker {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 8px 5px 5px;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.05;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.55);
+    transform: translate(-50%, -100%);
+}
+.image-ready .hardware-marker { display: flex; }
+.hardware-marker strong {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    color: #172534;
+    font-size: 13px;
+}
+.marker-pin {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 4px);
+    width: 3px;
+    height: 58px;
+    border: 0;
+    border-radius: 2px;
+    background: currentColor;
+    color: #ff3347;
+    transform: translateX(-50%);
+    animation: hardwarePulse 1.25s infinite;
+}
+.marker-pin::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 11px solid currentColor;
+    transform: translateX(-50%);
+}
+.marker-boot { left: 61.5%; top: 47%; background: #16885c; }
+.marker-reset { left: 52.5%; top: 47%; background: #d45555; }
+.marker-boot { transform: translate(0, -100%); }
+.marker-boot .marker-pin { left: 0; }
+.marker-reset { transform: translate(-100%, -100%); }
+.marker-reset .marker-pin { left: 100%; }
+
+@keyframes hardwarePulse {
+    0%, 100% { opacity: 0.65; }
+    50% { opacity: 1; filter: drop-shadow(0 0 5px currentColor); }
+}
+
+@media (max-width: 540px) {
+    .boot-mode-guide { grid-template-columns: 1fr; }
+    .boot-buttons-image-wrap { min-height: 140px; }
+    .boot-mode-copy ol { grid-template-columns: 1fr; }
+    .hardware-marker span:last-child { display: none; }
+}
+.firmware-progress { margin-top: 18px; }
+.firmware-progress-track { height: 8px; overflow: hidden; border-radius: 5px; background: #0d1721; }
+.firmware-progress-track span { display: block; width: 0; height: 100%; background: #31a6e8; transition: width 0.15s; }
+#firmwareProgressText { display: block; margin-top: 6px; color: #afc2d5; font-size: 11px; }
+.firmware-message { min-height: 18px; margin-top: 12px; font-size: 12px; }
+.firmware-message.is-info { color: #8ed0ff; }
+.firmware-message.is-success { color: #63d99a; }
+.firmware-message.is-error { color: #ff8b94; }
+
+.firmware-connect-gate {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid #45617e;
+    border-radius: 8px;
+    background: #101d29;
+}
+
+.firmware-connect-gate strong { display: block; color: #fff; font-size: 13px; }
+.firmware-connect-gate p { margin-top: 3px; color: #9eb1c3; font-size: 11px; line-height: 1.4; }
+.firmware-step-number {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #2476b5;
+    color: #fff;
+    font-weight: 800;
+}
+
+.firmware-auto-file {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3px 12px;
+    margin-bottom: 14px;
+    padding: 11px 14px;
+    border: 1px solid #36516b;
+    border-radius: 7px;
+    background: #132231;
+}
+.firmware-auto-file span { grid-row: 1 / 3; align-self: center; color: #7fbbe8; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.firmware-auto-file strong { color: #edf5ff; font-size: 12px; text-align: right; }
+.firmware-auto-file small { color: #8fa7bd; font-size: 10px; text-align: right; }
+
+.firmware-connect-gate[hidden],
+.firmware-auto-file[hidden],
+.boot-mode-guide[hidden] { display: none; }
+
+/* Linhas das categorias */
+.blocklyTreeRow,
+.blocklyToolboxCategory {
+    width: 96px !important;
+    min-height: 52px !important;
+    height: auto !important;
+    padding: 5px 2px 6px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    color: #d7dee8 !important;
+    border: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 2px !important;
+    line-height: 1.05 !important;
+    white-space: normal !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease !important;
+}
+
+.blocklyToolboxCategoryContent {
+    width: 96px !important;
+    min-height: 52px !important;
+    padding: 5px 2px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 2px !important;
+    line-height: 1.05 !important;
+    white-space: normal !important;
+}
+
+.blocklyTreeRow:hover,
+.blocklyToolboxCategory:hover {
+    background-color: #293646 !important;
+    color: #ffffff !important;
+}
+
+.blocklyTreeSelected,
+.blocklyToolboxSelected {
+    background: #314154 !important;
+    color: #ffffff !important;
+    box-shadow: inset 0 0 0 1px rgba(215, 222, 232, 0.08) !important;
+}
+
+.blocklyTreeIcon,
+.blocklyTreeIconOpen,
+.blocklyTreeIconClosed,
+.blocklyTreeIconNone,
+.blocklyToolboxCategoryIcon {
+    display: none !important;
+}
+
+.blocklyTreeRow .mihuToolboxDot,
+.blocklyToolboxCategory .mihuToolboxDot {
+    width: 19px !important;
+    height: 19px !important;
+    flex: 0 0 19px !important;
+    display: block !important;
+    border-radius: 50% !important;
+    background-color: var(--mihu-toolbox-category-colour, #7f8c8d) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Texto das categorias */
+.blocklyTreeLabel,
+.blocklyToolboxCategoryLabel {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
     font-weight: 500 !important;
-    font-size: 13px !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    max-width: 88px !important;
+    color: inherit !important;
+    text-align: center !important;
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
 }
 
-/* Flyout (subcategorias) */
+/* Flyout */
 .blocklyFlyout {
     background-color: #34495e !important;
     border-right: 1px solid #2c3e50 !important;
@@ -404,7 +1049,26 @@ body {
     fill-opacity: 1 !important;
 }
 
-/* Scrollbars do Blockly */
+.blocklyFlyout .blocklyBlockCanvas > g.blocklyDraggable {
+    transform-box: fill-box !important;
+}
+
+.blocklyFlyoutButton .blocklyText,
+.blocklyFlyoutButtonShadow .blocklyText {
+    fill: #5f6b7c !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+.blocklyFlyoutButtonBackground {
+    fill: #f8fafc !important;
+    stroke: #cfd7e3 !important;
+    stroke-width: 1px !important;
+    rx: 2px !important;
+    ry: 2px !important;
+}
+
+/* Scrollbars internas do Blockly */
 .blocklyScrollbarHorizontal,
 .blocklyScrollbarVertical {
     background-color: #2c3e50 !important;
@@ -414,59 +1078,68 @@ body {
     fill: #3498db !important;
 }
 
-/* Blocos */
+/* Caminho principal dos blocos */
 .blocklyPath {
     stroke: #1a252f !important;
     stroke-width: 1px !important;
 }
 
-/* Texto dentro dos blocos */
+/* Texto dos blocos */
 .blocklyText {
     fill: #000000 !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    font-weight: 500 !important;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+    font-weight: 600 !important;
 }
 
-/* Campos de entrada nos blocos */
+/* Texto dentro dos campos editáveis */
+.blocklyEditableText text {
+    fill: #000000 !important;
+}
+
+/* Mantém o texto visível durante hover em campos editáveis */
+.blocklyEditableText:hover text {
+    fill: #000000 !important;
+}
+
+/* Fundo dos campos editáveis */
+.blocklyEditableText > rect,
+.blocklyFieldNumber > rect,
+.blocklyFieldTextInput > rect {
+    fill: #ffffff !important;
+    fill-opacity: 1 !important;
+    stroke: rgba(0, 0, 0, 0.35) !important;
+    stroke-width: 1px !important;
+}
+
 .blocklyEditableText {
-    fill: #021013 !important;
+    transform-box: fill-box !important;
 }
 
-.blocklyEditableText:hover {
-    fill: #3498db !important;
+/* Texto digitado em campo input */
+.blocklyFieldTextInput {
+    color: #000000 !important;
 }
 
-/* Conectores (entradas/saídas) */
-.blocklyConnection {
-    fill: #2c3e50 !important;
-    stroke: #3498db !important;
-}
-
+/* Destaque de conexão */
 .blocklyConnectionHighlight {
     fill: #3498db !important;
     stroke: #3498db !important;
 }
 
-/* Trash can (lixeira) */
+/* Lixeira */
 .blocklyTrash {
     fill: #e74c3c !important;
 }
 
-/* Zoom controls */
-.blocklyZoomControl {
+/* Tooltip */
+.blocklyTooltipDiv {
     background-color: #2c3e50 !important;
-    border-radius: 4px !important;
     border: 1px solid #34495e !important;
-}
-
-.blocklyZoomControl button {
-    background-color: #34495e !important;
-    border-color: #2c3e50 !important;
     color: #ecf0f1 !important;
-}
-
-.blocklyZoomControl button:hover {
-    background-color: #3498db !important;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+    padding: 8px 12px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Grid do workspace */
@@ -475,59 +1148,42 @@ body {
     stroke-width: 1px !important;
 }
 
-/* Drag surface (área de arrasto) */
+/* Superfície de arrasto */
 .blocklyDragSurface {
     background-color: rgba(26, 37, 47, 0.9) !important;
 }
 
-/* Tooltip */
-.blocklyTooltipDiv {
-    background-color: #2c3e50 !important;
-    border: 1px solid #34495e !important;
-    color: #ecf0f1 !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    padding: 8px 12px !important;
-    border-radius: 4px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+/* ===== SELEÇÃO DOS BLOCOS ===== */
+
+/* Mantém a cor original do bloco e apenas destaca a borda */
+.blocklySelected > .blocklyPath {
+    stroke: #ffcc00 !important;
+    stroke-width: 3px !important;
 }
 
-/* ===== CORES ESPECÍFICAS PARA CATEGORIAS ===== */
-/* Categoria Programa (Azul) */
-.blocklyPath[fill="#3498db"] {
+/* Mantém o texto visível quando o bloco está selecionado */
+.blocklySelected .blocklyText {
+    fill: #000000 !important;
+}
+
+.blocklySelected .blocklyEditableText text {
+    fill: #000000 !important;
+}
+
+/* Mantém o destaque durante arrasto */
+.blocklyBlockDragSurface .blocklySelected .blocklyPath {
+    stroke: #ffcc00 !important;
+    stroke-width: 3px !important;
+}
+
+/* ===== BLOCO PRINCIPAL MIHU ===== */
+.blocklyPath[data-block-type="mihu_setup_loop"] {
     fill: #3498db !important;
+    stroke: #2980b9 !important;
+    stroke-width: 1.5px !important;
 }
 
-/* Categoria Texto (Verde) */
-.blocklyPath[fill="#2ecc71"] {
-    fill: #2ecc71 !important;
-}
-
-/* Categoria Lógica (Vermelho) */
-.blocklyPath[fill="#e74c3c"] {
-    fill: #e74c3c !important;
-}
-
-/* Categoria Laços (Laranja) */
-.blocklyPath[fill="#f39c12"] {
-    fill: #f39c12 !important;
-}
-
-/* Categoria Matemática (Roxo) */
-.blocklyPath[fill="#9b59b6"] {
-    fill: #9b59b6 !important;
-}
-
-/* Categoria Variáveis (Marrom) */
-.blocklyPath[fill="#d35400"] {
-    fill: #d35400 !important;
-}
-
-/* Categoria Funções (Roxo escuro) */
-.blocklyPath[fill="#8e44ad"] {
-    fill: #8e44ad !important;
-}
-
-/* ===== ESTILOS PARA WORKSPACE VAZIO ===== */
+/* ===== WORKSPACE VAZIO ===== */
 #blocklyDiv:empty::before {
     content: "Arraste blocos aqui para criar seu programa";
     position: absolute;
@@ -542,20 +1198,17 @@ body {
     pointer-events: none;
 }
 
-/* ===== BLOCO MIHU INIT ESPECIAL ===== */
-.blocklyPath[data-block-type="mihu_init"] {
-    fill: #3498db !important;
-    stroke: #2980b9 !important;
-    stroke-width: 1.5px !important;
-}
-
-/* ===== RESPONSIVIDADE PARA BLOCKLY ===== */
+/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
     .blocklyTreeLabel {
         font-size: 12px !important;
     }
-    
+
     .blocklyTreeRow {
         padding: 8px 12px !important;
+    }
+
+    .code-panel {
+        width: 40%;
     }
 }

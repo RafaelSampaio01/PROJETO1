@@ -106,6 +106,8 @@ function createNewProgram(name = null) {
     programs[id] = {
         name: programName,
         state: null,
+        customCode: "",
+        customCodeActive: false,
         created: new Date().toISOString(),
         lastModified: new Date().toISOString()
     };
@@ -191,64 +193,108 @@ function getProgramFilename(id) {
 }
 
 // ===== INTERFACE =====
+function closeProgramMenus(except = null) {
+    document.querySelectorAll(".program-tab-menu").forEach(menu => {
+        if (menu !== except) menu.hidden = true;
+    });
+    document.querySelectorAll(".tab-menu-btn").forEach(button => {
+        button.setAttribute("aria-expanded", String(Boolean(except && button.nextElementSibling === except)));
+    });
+}
+
+function promptProgramRename(id) {
+    const program = programs[id];
+    if (!program) return;
+    const newName = prompt(window.mihuT?.("program.rename") || "Novo nome:", program.name);
+    if (newName && newName !== program.name) renameProgram(id, newName);
+}
+
 function updateTabs() {
-    const tabsContainer = document.getElementById('programTabs');
+    const tabsContainer = document.getElementById("programTabs");
     if (!tabsContainer) return;
-    
     tabsContainer.innerHTML = "";
-    
+
     Object.keys(programs).forEach(id => {
         const program = programs[id];
-        
-        // Criar tab
         const tab = document.createElement("div");
         tab.className = "program-tab" + (id === currentProgramId ? " active" : "");
         tab.dataset.programId = id;
-        
-        // Nome
+
         const nameSpan = document.createElement("span");
         nameSpan.className = "tab-name";
         nameSpan.textContent = program.name;
-        
-        // Botão fechar
+
+        const menuWrap = document.createElement("span");
+        menuWrap.className = "tab-menu-wrap";
+        const menuBtn = document.createElement("button");
+        menuBtn.className = "tab-menu-btn";
+        menuBtn.type = "button";
+        menuBtn.textContent = "⋮";
+        menuBtn.title = window.mihuT?.("program.options") || "Opções do projeto";
+        menuBtn.setAttribute("aria-label", menuBtn.title);
+        menuBtn.setAttribute("aria-haspopup", "menu");
+        menuBtn.setAttribute("aria-expanded", "false");
+        const menu = document.createElement("span");
+        menu.className = "program-tab-menu";
+        menu.hidden = true;
+        menu.setAttribute("role", "menu");
+        const renameBtn = document.createElement("button");
+        renameBtn.type = "button";
+        renameBtn.setAttribute("role", "menuitem");
+        renameBtn.textContent = window.mihuT?.("program.renameAction") || "Renomear projeto";
+        menu.appendChild(renameBtn);
+        menuWrap.append(menuBtn, menu);
+
         const closeBtn = document.createElement("span");
         closeBtn.className = "tab-close";
         closeBtn.textContent = "×";
-        closeBtn.title = "Excluir programa";
-        
-        // Montar
-        tab.appendChild(nameSpan);
-        tab.appendChild(closeBtn);
+        closeBtn.title = window.mihuT?.("program.delete") || "Excluir programa";
+
+        tab.append(nameSpan, menuWrap, closeBtn);
         tabsContainer.appendChild(tab);
-        
-        // Eventos
-        tab.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('tab-close')) {
-                if (id !== currentProgramId) {
-                    loadProgram(id);
-                }
-            }
+
+        tab.addEventListener("click", event => {
+            if (!event.target.closest(".tab-close, .tab-menu-wrap") && id !== currentProgramId) loadProgram(id);
         });
-        
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (confirm(`Excluir "${program.name}"?`)) {
-                deleteProgram(id);
-            }
+        closeBtn.addEventListener("click", event => {
+            event.stopPropagation();
+            if (confirm(window.mihuT?.("program.deleteConfirm", {name: program.name}) || `Excluir "${program.name}"?`)) deleteProgram(id);
         });
-        
-        tab.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            const newName = prompt("Novo nome:", program.name);
-            if (newName && newName !== program.name) {
-                renameProgram(id, newName);
+        menuBtn.addEventListener("click", event => {
+            event.stopPropagation();
+            const opening = menu.hidden;
+            closeProgramMenus(opening ? menu : null);
+            if (opening) {
+                const rect = menuBtn.getBoundingClientRect();
+                menu.style.top = `${rect.bottom + 4}px`;
+                menu.style.left = `${Math.max(8, Math.min(rect.right - 150, window.innerWidth - 158))}px`;
             }
+            menu.hidden = !opening;
+            menuBtn.setAttribute("aria-expanded", String(opening));
+        });
+        renameBtn.addEventListener("click", event => {
+            event.stopPropagation();
+            closeProgramMenus();
+            promptProgramRename(id);
+        });
+        tab.addEventListener("contextmenu", event => {
+            event.preventDefault();
+            promptProgramRename(id);
         });
     });
+
+    const addTab = document.createElement("button");
+    addTab.className = "program-tab-add";
+    addTab.type = "button";
+    addTab.textContent = "+";
+    addTab.title = window.mihuT?.("program.new") || "Novo projeto";
+    addTab.addEventListener("click", () => createNewProgram());
+    tabsContainer.appendChild(addTab);
 }
 
 // ===== INICIALIZAÇÃO =====
 function initializeProgramManager() {
+    document.addEventListener("click", () => closeProgramMenus());
     // Carregar programas salvos
     const loaded = autoloadAll();
     
